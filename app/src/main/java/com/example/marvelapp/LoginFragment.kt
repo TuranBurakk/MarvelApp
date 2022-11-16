@@ -55,11 +55,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.facebookbutton.registerCallback(callbackManager, object :
                 FacebookCallback<com.facebook.login.LoginResult> {
                 override fun onCancel() {
-                    TODO("Not yet implemented")
+
                 }
 
                 override fun onError(error: FacebookException) {
-                    TODO("Not yet implemented")
+
                 }
 
                 override fun onSuccess(result: com.facebook.login.LoginResult) {
