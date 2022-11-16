@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MarvelApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_in">Log In</string>
+    <string name="e_mail">e-mail</string>
+    <string name="password">password</string>
+    <string name="facebook_app_id">610343214176631</string>
+    <string name="fb_login_protocol_scheme">fb610343214176631</string>
+    <string name="facebook_client_token">ace7fad2f5a568057e9189b4aaada624</string>
+    <string name="my_web_client_id">666142870218-vn9aph2ah8pdp6qstsk3k1fvmjcfsrue.apps.googleusercontent.com</string>
+</resources>
