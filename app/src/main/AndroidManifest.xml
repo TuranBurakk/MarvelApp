@@ -13,7 +13,7 @@
     </queries>
 
     <application
-
+        android:name=".MarvelApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -40,7 +40,7 @@
         </activity>
 
         <activity
-            android:name=".GoogleSingInActivity"
+            android:name=".ui.GoogleSingInActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

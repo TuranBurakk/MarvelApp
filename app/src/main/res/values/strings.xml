@@ -9,4 +9,7 @@
     <string name="fb_login_protocol_scheme">fb610343214176631</string>
     <string name="facebook_client_token">ace7fad2f5a568057e9189b4aaada624</string>
     <string name="my_web_client_id">666142870218-vn9aph2ah8pdp6qstsk3k1fvmjcfsrue.apps.googleusercontent.com</string>
+    <string name="home">Home</string>
+    <string name="comics">Comics</string>
+    <string name="menu">Menu</string>
 </resources>
