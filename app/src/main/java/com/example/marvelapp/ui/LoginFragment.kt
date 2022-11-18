@@ -1,4 +1,4 @@
-package com.example.marvelapp
+package com.example.marvelapp.ui
 
 import android.content.ContentValues
 import android.content.Intent
@@ -19,7 +19,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment"
+    tools:context=".ui.LoginFragment"
     android:background="@drawable/backglogin">
 
     <TextView
@@ -33,7 +33,7 @@
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/fill2"
+        android:drawableStart="@drawable/usericon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="176dp"
-        android:drawableStart="@drawable/fill1"
+        android:drawableStart="@drawable/passwordicon"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/password"

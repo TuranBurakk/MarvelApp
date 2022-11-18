@@ -8,7 +8,9 @@ import androidx.navigation.ui.NavigationUI
 import com.example.marvelapp.utils.gone
 import com.example.marvelapp.utils.show
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

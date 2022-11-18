@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.marvelapp.MainActivity
-import com.example.marvelapp.base.IBottomBarInterface
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
