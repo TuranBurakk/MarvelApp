@@ -1,4 +1,4 @@
-package com.example.marvelapp.ui.HomeFragment
+package com.example.marvelapp.ui.Home
 
 import android.os.Bundle
 import android.view.View
@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelapp.base.BaseFragment
 import com.example.marvelapp.data.entity.ResultsData
 import com.example.marvelapp.databinding.FragmentHomeBinding
-import com.example.marvelapp.ui.HomeFragment.HomeAdapter
-import com.example.marvelapp.ui.HomeFragment.HomeFragmentViewModel
 import com.example.marvelapp.utils.Constants
 import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
@@ -34,13 +32,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         binding.heroRecyclerView.adapter = adapter
         binding.heroRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        getHero(offset)
         onScrollListener()
     }
 
-    override fun onResume() {
-        super.onResume()
-        getHero(offset)
-    }
+
 
     private fun getHero(offset : Int){
         viewModel.getHero(offset).observe(viewLifecycleOwner){response ->
@@ -48,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 Resource.Status.SUCCESS ->{
                     totalCount = response.data?.characters?.total ?: 0
                     heroList.addAll(response.data?.characters?.results ?: arrayListOf())
-                    val scrollDistance = heroList.size - (response.data?.characters?.results?.size ?: 0)
+                    val scrollDistance = heroList.size
                     binding.heroRecyclerView.scrollToPosition(scrollDistance)
                     setData()
                 }
@@ -67,11 +63,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.heroRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!binding.heroRecyclerView.canScrollHorizontally(1)&&
+
+                if (!binding.heroRecyclerView.canScrollVertically(1)&&
                         newState == RecyclerView.SCROLL_STATE_IDLE &&
-                        adapter.itemCount < totalCount
+                            heroList.size < totalCount
                 ){
-                    offset += 1
+                    offset += 100
                     getHero(offset)
                 }
             }
@@ -79,7 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setData(){
-        adapter.updateHeroList(heroList)
+        adapter.differ.submitList(heroList)
     }
 
 }

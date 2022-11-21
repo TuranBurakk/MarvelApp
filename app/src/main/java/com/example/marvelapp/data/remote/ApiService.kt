@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("/v1/public/characters")
     suspend fun getHero(
-        @Query("limit") limit : Int = 100,
+        @Query("limit") limit : Int ,
         @Query("offset") offset : Int,
         @Query(Constants.HEADER) header: String = Constants.HEADER_API_ID,
         @Query(Constants.HASH) hash: String = Constants.HASH_KEY,

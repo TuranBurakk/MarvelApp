@@ -1,4 +1,4 @@
-package com.example.marvelapp.ui.ComicsFragment
+package com.example.marvelapp.ui.Comics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

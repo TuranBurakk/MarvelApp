@@ -1,7 +1,9 @@
-package com.example.marvelapp.ui.ComicsFragment
+package com.example.marvelapp.ui.Comics
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.marvelapp.data.entity.ComicsResults
@@ -11,11 +13,22 @@ import com.example.marvelapp.utils.downloadFromUrl
 
 class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
 
-    private var comicsList = emptyList<ComicsResults>()
+
 
     class ComicsHolder(val binding : ComicsRowBinding): RecyclerView.ViewHolder(binding.root) {
 
     }
+    private val differCallback = object : DiffUtil.ItemCallback<ComicsResults>(){
+        override fun areItemsTheSame(oldItem: ComicsResults, newItem: ComicsResults): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: ComicsResults, newItem: ComicsResults): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsHolder {
 
@@ -26,7 +39,7 @@ class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
 
     override fun onBindViewHolder(holder: ComicsHolder, position: Int) {
 
-        val comic = comicsList[position]
+        val comic = differ.currentList[position]
         val url = "${comic.thumbnail.path}.${comic.thumbnail.extension}"
         val newUrl = convert(url)
 
@@ -37,10 +50,7 @@ class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
 
     }
 
-    override fun getItemCount(): Int = comicsList.size
+    override fun getItemCount(): Int = differ.currentList.size
 
-    fun updateComicsList(newList : List<ComicsResults>){
-        comicsList = newList
-        notifyDataSetChanged()
-    }
+
 }

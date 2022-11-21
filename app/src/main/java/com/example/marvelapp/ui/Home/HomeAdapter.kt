@@ -1,7 +1,9 @@
-package com.example.marvelapp.ui.HomeFragment
+package com.example.marvelapp.ui.Home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelapp.data.entity.ResultsData
 import com.example.marvelapp.databinding.HeroRowBinding
@@ -9,10 +11,21 @@ import com.example.marvelapp.utils.convert
 import com.example.marvelapp.utils.downloadFromUrl
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
-    private var list = emptyList<ResultsData>()
+
     class HeroHolder(val binding: HeroRowBinding): RecyclerView.ViewHolder(binding.root){
 
     }
+    private val differCallback = object : DiffUtil.ItemCallback<ResultsData>(){
+        override fun areItemsTheSame(oldItem: ResultsData, newItem: ResultsData): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: ResultsData, newItem: ResultsData): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroHolder {
         val view = LayoutInflater.from(parent.context)
@@ -20,19 +33,19 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
     }
 
     override fun onBindViewHolder(holder: HeroHolder, position: Int) {
-        val hero = list[position]
+
+        val hero = differ.currentList[position]
+
         holder.binding.apply {
             nameTv.text = hero.name
         }
         val url = "${hero.image?.path}.${hero.image?.extension}"
         val newUrl = convert(url)
         holder.binding.imageView.downloadFromUrl(newUrl)
+
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = differ.currentList.size
 
-    fun updateHeroList(newList : List<ResultsData>){
-        list = newList
-        notifyDataSetChanged()
-    }
+
 }

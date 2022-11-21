@@ -1,4 +1,4 @@
-package com.example.marvelapp.ui.ComicsFragment
+package com.example.marvelapp.ui.Comics
 
 import android.os.Bundle
 import android.view.View
@@ -70,11 +70,12 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (
-                    !binding.comicsRecyclerView.canScrollHorizontally(1)&&
+                    !binding.comicsRecyclerView.canScrollVertically(1)&&
                     newState == RecyclerView.SCROLL_STATE_IDLE &&
                     adapter.itemCount < totalCount
                 ){
-                    offset += 1
+                    offset += 100
+                    getComics(offset)
 
                 }
             }
@@ -82,6 +83,6 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
     }
 
     private fun setData(){
-        adapter.updateComicsList(comicsList)
+        adapter.differ.submitList(comicsList)
     }
 }

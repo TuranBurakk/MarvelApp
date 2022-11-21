@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.marvelapp.ui.HomeFragment.HomeFragment"
+        android:name="com.example.marvelapp.ui.Home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/comicsFragment2"
-        android:name="com.example.marvelapp.ui.ComicsFragment.ComicsFragment"
+        android:name="com.example.marvelapp.ui.Comics.ComicsFragment"
         android:label="fragment_comics"
         tools:layout="@layout/fragment_comics" />
 </navigation>

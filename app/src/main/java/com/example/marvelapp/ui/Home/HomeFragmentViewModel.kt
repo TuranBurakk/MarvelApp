@@ -1,4 +1,4 @@
-package com.example.marvelapp.ui.HomeFragment
+package com.example.marvelapp.ui.Home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
