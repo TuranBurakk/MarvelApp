@@ -1,9 +1,8 @@
-package com.example.marvelapp.ui
+package com.example.marvelapp.ui.HomeFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marvelapp.data.entity.CharactersData
 import com.example.marvelapp.data.entity.ResultsData
 import com.example.marvelapp.databinding.HeroRowBinding
 import com.example.marvelapp.utils.convert

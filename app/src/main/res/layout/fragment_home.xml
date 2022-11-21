@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainbackg"
-    tools:context=".HomeFragment">
+    tools:context=".ui.HomeFragment.HomeFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/heroRecyclerView"
         android:layout_width="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:background="@drawable/mainbackg"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"

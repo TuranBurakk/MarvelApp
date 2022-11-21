@@ -7,6 +7,7 @@ data class CharactersData(
 )
 
 data class Characters(
+    @SerializedName("total") val total : Int?,
     @SerializedName("limit") val limit : Int?,
     @SerializedName("results") val results : List<ResultsData>?
 )
