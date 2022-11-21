@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.marvelapp.MainActivity
-import com.example.marvelapp.ui.LoginFragment.Companion.EXTRA_NAME
 import com.example.marvelapp.databinding.ActivityGoogleSingInBinding
+import com.example.marvelapp.ui.LoginFragment.LoginFragment.Companion.EXTRA_NAME
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

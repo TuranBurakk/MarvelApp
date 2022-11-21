@@ -6,5 +6,5 @@ object Constants {
     const val HASH = "hash"
     const val HASH_KEY = "894925af2450da77547d69a59cfbd4d4"
     const val BASE_URL = "https://gateway.marvel.com"
-
+    const val offset = 0
 }
