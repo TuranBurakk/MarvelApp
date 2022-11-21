@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.marvelapp.ui.LoginFragment"
+        android:name="com.example.marvelapp.ui.LoginFragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.marvelapp.HomeFragment"
+        android:name="com.example.marvelapp.ui.HomeFragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_comicsFragment2"
+            app:destination="@id/comicsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicsFragment2"
+        android:name="com.example.marvelapp.ui.ComicsFragment.ComicsFragment"
+        android:label="fragment_comics"
+        tools:layout="@layout/fragment_comics" />
 </navigation>

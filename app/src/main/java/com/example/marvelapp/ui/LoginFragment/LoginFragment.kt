@@ -1,4 +1,4 @@
-package com.example.marvelapp.ui
+package com.example.marvelapp.ui.LoginFragment
 
 import android.content.ContentValues
 import android.content.Intent

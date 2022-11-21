@@ -6,7 +6,10 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) {
-    fun getHero() = performNetworkOperation {
-        remoteDataSource.getCharacters()
+    fun getHero(offset: Int) = performNetworkOperation {
+        remoteDataSource.getHero(offset)
+    }
+    fun getComics(offset: Int) = performNetworkOperation {
+        remoteDataSource.getComics(offset)
     }
 }
