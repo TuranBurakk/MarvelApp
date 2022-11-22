@@ -14,6 +14,7 @@
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.marvelapp.ui.Home.HomeFragment"
@@ -22,10 +23,30 @@
         <action
             android:id="@+id/action_homeFragment_to_comicsFragment2"
             app:destination="@id/comicsFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_tabControllerFragment"
+            app:destination="@id/tabControllerFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment2"
         android:name="com.example.marvelapp.ui.Comics.ComicsFragment"
         android:label="fragment_comics"
         tools:layout="@layout/fragment_comics" />
+    <fragment
+        android:id="@+id/tabControllerFragment"
+        android:name="com.example.marvelapp.ui.TabController.TabControllerFragment"
+        android:label="fragment_tab_controller"
+        tools:layout="@layout/fragment_tab_controller" >
+        <argument
+            android:name="id"
+            app:argType="long"/>
+        <action
+            android:id="@+id/action_tabControllerFragment_to_heroStoriesFragment"
+            app:destination="@id/heroStoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heroStoriesFragment"
+        android:name="com.example.marvelapp.ui.HeroStories.HeroStoriesFragment"
+        android:label="fragment_hero_stories"
+        tools:layout="@layout/fragment_hero_stories" />
 </navigation>
