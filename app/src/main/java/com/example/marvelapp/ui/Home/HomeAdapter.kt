@@ -2,6 +2,7 @@ package com.example.marvelapp.ui.Home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -35,13 +36,18 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
     override fun onBindViewHolder(holder: HeroHolder, position: Int) {
 
         val hero = differ.currentList[position]
+        val url = "${hero.image?.path}.${hero.image?.extension}"
+        val newUrl = convert(url)
 
         holder.binding.apply {
             nameTv.text = hero.name
+            imageView.downloadFromUrl(newUrl)
         }
-        val url = "${hero.image?.path}.${hero.image?.extension}"
-        val newUrl = convert(url)
-        holder.binding.imageView.downloadFromUrl(newUrl)
+
+        holder.binding.imageView.setOnClickListener {
+          val action = HomeFragmentDirections.actionHomeFragmentToTabControllerFragment(hero.id!!)
+            it.findNavController().navigate(action)
+        }
 
     }
 

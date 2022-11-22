@@ -2,6 +2,8 @@ package com.example.marvelapp.ui.Comics
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import com.example.marvelapp.utils.Constants
 import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding::inflate) {
@@ -31,13 +34,9 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
         super.onViewCreated(view, savedInstanceState)
         binding.comicsRecyclerView.adapter = adapter
         binding.comicsRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
-        onScrollListener()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
         getComics(offset)
+        onScrollListener()
+        searchViewListener()
     }
 
     private fun getComics(offset : Int){
@@ -84,5 +83,34 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
 
     private fun setData(){
         adapter.differ.submitList(comicsList)
+    }
+    private fun searchViewListener(){
+        binding.searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                filter(msg)
+                return false
+            }
+        })
+    }
+
+    private fun filter(text : String?){
+
+        val filteredlist: ArrayList<ComicsResults> = ArrayList()
+
+        for (item in comicsList) {
+            if (item.title?.lowercase(Locale.getDefault())?.contains(text!!.lowercase(Locale.getDefault()))!!) {
+                filteredlist.add(item)
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            adapter.differ.submitList(filteredlist)
+        }
     }
 }

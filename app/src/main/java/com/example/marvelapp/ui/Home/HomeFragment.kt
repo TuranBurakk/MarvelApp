@@ -2,6 +2,8 @@ package com.example.marvelapp.ui.Home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import com.example.marvelapp.utils.Constants
 import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -33,6 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.heroRecyclerView.adapter = adapter
         binding.heroRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         getHero(offset)
+        searchViewListener()
         onScrollListener()
     }
 
@@ -78,5 +82,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setData(){
         adapter.differ.submitList(heroList)
     }
+    private fun searchViewListener(){
+        binding.searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(msg: String): Boolean {
+                filter(msg)
+                return false
+            }
+        })
+    }
+
+    private fun filter(text : String?){
+
+        val filteredlist: ArrayList<ResultsData> = ArrayList()
+
+        for (item in heroList) {
+            if (item.name?.lowercase(Locale.getDefault())?.contains(text!!.lowercase(Locale.getDefault()))!!) {
+                filteredlist.add(item)
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            adapter.differ.submitList(filteredlist)
+        }
+    }
 }
