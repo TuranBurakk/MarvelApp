@@ -12,4 +12,8 @@ class RemoteDataSource @Inject constructor(private val apiService : ApiService):
     suspend fun getComics(offset : Int)= getResult {
         apiService.getComics(100,offset)
     }
+
+    suspend fun getHeroComics(characterId : Long) = getResult {
+        apiService.getHeroComics(characterId)
+    }
 }

@@ -34,7 +34,6 @@
         android:text="@string/description"
         android:textColor="#2E70C1"
         android:textSize="15sp"
-        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
