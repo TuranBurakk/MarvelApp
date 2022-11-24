@@ -12,4 +12,7 @@ class Repository @Inject constructor(
     fun getComics(offset: Int) = performNetworkOperation {
         remoteDataSource.getComics(offset)
     }
+    fun getHeroComics(characterId : Long) = performNetworkOperation{
+        remoteDataSource.getHeroComics(characterId)
+    }
 }

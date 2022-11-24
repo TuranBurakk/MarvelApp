@@ -29,7 +29,7 @@ class TabControllerFragment :
     }
 
     private fun initTabs(){
-        adapter.setArg(args.id)
+        args.id.let { adapter.setArg(it) }
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -39,7 +39,7 @@ class TabControllerFragment :
 
     private fun initBack(){
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(TabControllerFragmentDirections.actionTabControllerFragmentToHomeFragment())
         }
     }
 }

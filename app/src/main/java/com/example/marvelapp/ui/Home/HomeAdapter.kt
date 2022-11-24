@@ -44,8 +44,8 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
             imageView.downloadFromUrl(newUrl)
         }
 
-        holder.binding.imageView.setOnClickListener {
-          val action = HomeFragmentDirections.actionHomeFragmentToTabControllerFragment(hero.id!!)
+        holder.binding.root.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToTabControllerFragment(hero!!)
             it.findNavController().navigate(action)
         }
 

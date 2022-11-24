@@ -40,11 +40,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         onScrollListener()
     }
 
-
-
     private fun getHero(offset : Int){
         viewModel.getHero(offset).observe(viewLifecycleOwner){response ->
             when(response.status){
+
                 Resource.Status.SUCCESS ->{
                     totalCount = response.data?.characters?.total ?: 0
                     heroList.addAll(response.data?.characters?.results ?: arrayListOf())
@@ -54,12 +53,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
                 Resource.Status.ERROR -> {
                     showDialog(requireContext(), message = "${response.message}")
+
                 }
                 Resource.Status.LOADING ->{
-
                 }
             }
-
         }
     }
 
@@ -82,6 +80,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setData(){
         adapter.differ.submitList(heroList)
     }
+
     private fun searchViewListener(){
         binding.searchView.setOnQueryTextListener(object  : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
