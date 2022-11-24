@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_tab_controller" >
         <argument
             android:name="id"
-            app:argType="long"/>
+            app:argType="com.example.marvelapp.data.entity.ResultsData" />
         <action
             android:id="@+id/action_tabControllerFragment_to_heroStoriesFragment"
             app:destination="@id/heroStoriesFragment" />
@@ -48,5 +48,9 @@
         android:id="@+id/heroStoriesFragment"
         android:name="com.example.marvelapp.ui.HeroStories.HeroStoriesFragment"
         android:label="fragment_hero_stories"
-        tools:layout="@layout/fragment_hero_stories" />
+        tools:layout="@layout/fragment_hero_stories" >
+        <argument
+            android:name="Hero"
+            app:argType="com.example.marvelapp.data.entity.ResultsData" />
+    </fragment>
 </navigation>

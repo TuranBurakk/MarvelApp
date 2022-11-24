@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun getHero(offset : Int){
         viewModel.getHero(offset).observe(viewLifecycleOwner){response ->
             when(response.status){
+
                 Resource.Status.SUCCESS ->{
                     totalCount = response.data?.characters?.total ?: 0
                     heroList.addAll(response.data?.characters?.results ?: arrayListOf())
@@ -52,12 +53,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     binding.heroRecyclerView.scrollToPosition(scrollDistance)
                     setData()
                 }
+
                 Resource.Status.ERROR -> {
                     showDialog(requireContext(), message = "${response.message}")
+
                 }
+
                 Resource.Status.LOADING ->{
 
                 }
+
             }
 
         }
