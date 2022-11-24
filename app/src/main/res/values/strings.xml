@@ -12,4 +12,5 @@
     <string name="home">Home</string>
     <string name="comics">Comics</string>
     <string name="menu">Menu</string>
+    <string name="description">description</string>
 </resources>

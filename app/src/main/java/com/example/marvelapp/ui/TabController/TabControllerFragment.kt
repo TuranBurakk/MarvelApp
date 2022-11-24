@@ -39,7 +39,7 @@ class TabControllerFragment :
 
     private fun initBack(){
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(TabControllerFragmentDirections.actionTabControllerFragmentToHomeFragment())
         }
     }
 }
