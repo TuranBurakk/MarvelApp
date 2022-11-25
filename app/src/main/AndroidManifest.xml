@@ -47,6 +47,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".ui.WebView.WebViewFragment"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

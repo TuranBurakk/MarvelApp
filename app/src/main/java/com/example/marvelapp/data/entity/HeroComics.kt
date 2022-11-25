@@ -17,7 +17,7 @@ data class HeroComicsData(
 @Parcelize
 data class HeroComicsResultData(
     @SerializedName("title") val title : String?,
-    @SerializedName("images") val images : List<HeroComicsImage>?
+    @SerializedName("thumbnail") val images : HeroComicsImage?
 ):Parcelable
 
 @Parcelize

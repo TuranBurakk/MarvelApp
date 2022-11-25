@@ -47,9 +47,6 @@
             android:id="@+id/action_tabControllerFragment_to_heroDetailFragment"
             app:destination="@id/heroDetailFragment" />
         <action
-            android:id="@+id/action_tabControllerFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
-        <action
             android:id="@+id/action_tabControllerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
@@ -67,16 +64,4 @@
         android:name="com.example.marvelapp.ui.HeroDetail.HeroDetailFragment"
         android:label="fragment_hero_detail"
         tools:layout="@layout/fragment_hero_detail" />
-    <fragment
-        android:id="@+id/webViewFragment"
-        android:name="com.example.marvelapp.ui.WebView.WebViewFragment"
-        android:label="fragment_web_view"
-        tools:layout="@layout/fragment_web_view" >
-        <argument
-            android:name="hero"
-            app:argType="com.example.marvelapp.data.entity.ResultsData" />
-        <action
-            android:id="@+id/action_webViewFragment_to_tabControllerFragment"
-            app:destination="@id/tabControllerFragment" />
-    </fragment>
 </navigation>
