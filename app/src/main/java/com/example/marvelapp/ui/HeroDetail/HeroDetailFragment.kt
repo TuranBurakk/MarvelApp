@@ -24,6 +24,7 @@ class HeroDetailFragment(val hero: ResultsData) :
         id?.let { getHeroComics(it) }
         binding.heroComicsRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         binding.heroComicsRecyclerView.adapter = adapter
+
     }
 
     private fun getHeroComics(id:Long){
@@ -35,7 +36,6 @@ class HeroDetailFragment(val hero: ResultsData) :
                                 adapter.setData(it)
                             }
                         }
-
                     }
                     Resource.Status.ERROR -> {
                         showDialog(requireContext(), message = "${response.message}")

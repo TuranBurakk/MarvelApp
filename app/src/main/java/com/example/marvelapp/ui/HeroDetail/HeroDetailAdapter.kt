@@ -23,13 +23,13 @@ class HeroDetailAdapter : RecyclerView.Adapter<HeroDetailAdapter.HeroComicsHolde
     }
 
     override fun onBindViewHolder(holder: HeroComicsHolder, position: Int) {
-       holder.binding.apply {
-           titleTv.text = list[position].title
-           val url = "${list[position].images?.get(0)?.path}" +
-                   ".${list[position].images?.get(0)?.extension}"
-           val newUrl = convert(url)
-           imageView.downloadFromUrl(newUrl)
 
+        val url = "${list[position].images?.path}.${list[position].images?.extension}"
+        val newUrl = convert(url)
+
+        holder.binding.apply {
+           titleTv.text = list[position].title
+           imageView.downloadFromUrl(newUrl)
        }
     }
 
