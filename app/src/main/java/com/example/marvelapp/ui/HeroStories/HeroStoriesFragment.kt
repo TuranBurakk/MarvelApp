@@ -34,7 +34,11 @@ class HeroStoriesFragment(val hero: ResultsData) :
         binding.urlTv.text = "More info : $url"
 
         binding.urlTv.setOnClickListener {
-          startActivity(WebViewFragment.newIntent(requireContext(),hero))
+          startActivity(hero.detail?.get(0)?.url?.let { it1 ->
+              WebViewFragment.newIntent(requireContext(),
+                  it1
+              )
+          })
         }
     }
 

@@ -22,10 +22,12 @@ class WebViewFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
             binding = ActivityWebViewBinding.inflate(layoutInflater)
             setContentView(binding.root)
-            val hero = intent.getParcelableExtra<ResultsData>("id")
+            val hero = intent.getStringExtra("id")
             binding.webView.webViewClient = WebViewClient()
 
-            hero?.detail?.get(0)?.url?.let { binding.webView.loadUrl(it) }
+        if (hero != null) {
+            binding.webView.loadUrl(hero)
+        }
             binding.backButtonWebView.setOnClickListener {
                finish()
             }
@@ -51,9 +53,9 @@ class WebViewFragment : AppCompatActivity() {
     }
     companion object{
         private const val ID = "id"
-        fun newIntent(context: Context,hero: ResultsData) : Intent{
+        fun newIntent(context: Context,url:String) : Intent{
             val intent = Intent(context,WebViewFragment:: class.java)
-            intent.putExtra(ID,hero)
+            intent.putExtra(ID,url)
             return intent
         }
     }
