@@ -98,7 +98,7 @@
         android:id="@+id/comicsStoriesFragment"
         android:name="com.example.marvelapp.ui.ComicsStoriesFragment.ComicsStoriesFragment"
         android:label="fragment_comics_stories_fragment"
-        tools:layout="@layout/fragment_comics_stories_fragment" >
+        tools:layout="@layout/fragment_comics_stories" >
         <action
             android:id="@+id/action_comicsStoriesFragment_to_comicsTabControllerFragment"
             app:destination="@id/comicsTabControllerFragment" />
