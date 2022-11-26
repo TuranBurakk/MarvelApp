@@ -2,6 +2,7 @@ package com.example.marvelapp.ui.Comics
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,11 @@ class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
         holder.binding.apply {
             comicsNameTv.text = comic.title
             comicsImageView.downloadFromUrl(newUrl)
+        }
+        holder.binding.root.setOnClickListener {
+            it.findNavController()
+                .navigate(ComicsFragmentDirections
+                    .actionComicsFragment2ToComicsTabControllerFragment(comic))
         }
 
     }

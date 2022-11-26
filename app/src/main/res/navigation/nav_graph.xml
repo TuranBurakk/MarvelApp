@@ -31,7 +31,11 @@
         android:id="@+id/comicsFragment2"
         android:name="com.example.marvelapp.ui.Comics.ComicsFragment"
         android:label="fragment_comics"
-        tools:layout="@layout/fragment_comics" />
+        tools:layout="@layout/fragment_comics" >
+        <action
+            android:id="@+id/action_comicsFragment2_to_comicsTabControllerFragment"
+            app:destination="@id/comicsTabControllerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tabControllerFragment"
         android:name="com.example.marvelapp.ui.TabController.TabControllerFragment"
@@ -64,4 +68,39 @@
         android:name="com.example.marvelapp.ui.HeroDetail.HeroDetailFragment"
         android:label="fragment_hero_detail"
         tools:layout="@layout/fragment_hero_detail" />
+    <fragment
+        android:id="@+id/comicsTabControllerFragment"
+        android:name="com.example.marvelapp.ui.ComicsTabController.ComicsTabControllerFragment"
+        android:label="ComicsTabControllerFragment" >
+        <argument
+            android:name="comics"
+            app:argType="com.example.marvelapp.data.entity.ComicsResults" />
+        <action
+            android:id="@+id/action_comicsTabControllerFragment_to_comicsDetailFragment"
+            app:destination="@id/comicsDetailFragment" />
+        <action
+            android:id="@+id/action_comicsTabControllerFragment_to_comicsStoriesFragment"
+            app:destination="@id/comicsStoriesFragment" />
+        <action
+            android:id="@+id/action_comicsTabControllerFragment_to_comicsFragment2"
+            app:destination="@id/comicsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicsDetailFragment"
+        android:name="com.example.marvelapp.ui.ComicsDetail.ComicsDetailFragment"
+        android:label="fragment_comics_detail"
+        tools:layout="@layout/fragment_comics_detail" >
+        <action
+            android:id="@+id/action_comicsDetailFragment_to_comicsTabControllerFragment"
+            app:destination="@id/comicsTabControllerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicsStoriesFragment"
+        android:name="com.example.marvelapp.ui.ComicsStoriesFragment.ComicsStoriesFragment"
+        android:label="fragment_comics_stories_fragment"
+        tools:layout="@layout/fragment_comics_stories_fragment" >
+        <action
+            android:id="@+id/action_comicsStoriesFragment_to_comicsTabControllerFragment"
+            app:destination="@id/comicsTabControllerFragment" />
+    </fragment>
 </navigation>
