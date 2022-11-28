@@ -32,7 +32,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val user = auth.currentUser
+        if (user != null){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+        }
         callbackManager = CallbackManager.Factory.create()
 
         binding.registerbutton.setOnClickListener {

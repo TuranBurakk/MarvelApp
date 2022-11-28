@@ -9,7 +9,7 @@
         android:icon="@drawable/comicsicon"
         android:title="@string/comics"/>
     <item
-        android:id="@+id/menu"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/burgericon"
-        android:title="@string/menu"/>
+        android:title="@string/profile"/>
 </menu>

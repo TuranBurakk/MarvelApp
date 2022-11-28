@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_homeFragment_to_tabControllerFragment"
             app:destination="@id/tabControllerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment2"
@@ -35,6 +38,9 @@
         <action
             android:id="@+id/action_comicsFragment2_to_comicsTabControllerFragment"
             app:destination="@id/comicsTabControllerFragment" />
+        <action
+            android:id="@+id/action_comicsFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/tabControllerFragment"
@@ -102,5 +108,14 @@
         <action
             android:id="@+id/action_comicsStoriesFragment_to_comicsTabControllerFragment"
             app:destination="@id/comicsTabControllerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.marvelapp.ui.Profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
