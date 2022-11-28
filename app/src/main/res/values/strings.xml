@@ -13,4 +13,7 @@
     <string name="menu">Menu</string>
     <string name="description">description</string>
     <string name="name">name</string>
+    <string name="log_out">Log out</string>
+    <string name="user">User</string>
+    <string name="profile">Profile</string>
 </resources>
