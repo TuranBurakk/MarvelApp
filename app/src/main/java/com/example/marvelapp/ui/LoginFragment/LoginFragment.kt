@@ -33,6 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         super.onViewCreated(view, savedInstanceState)
 
         val user = auth.currentUser
+
         if (user != null){
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
         }
@@ -103,7 +104,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     updateUI(user)
-                } else {
+                }else {
                     updateUI(null)
                 }
             }

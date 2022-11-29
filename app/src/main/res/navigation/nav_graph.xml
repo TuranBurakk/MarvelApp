@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteTabControllerFragment"
+            app:destination="@id/favoriteTabControllerFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment2"
@@ -41,6 +44,9 @@
         <action
             android:id="@+id/action_comicsFragment2_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_comicsFragment2_to_favoriteTabControllerFragment"
+            app:destination="@id/favoriteTabControllerFragment" />
     </fragment>
     <fragment
         android:id="@+id/tabControllerFragment"
@@ -117,5 +123,40 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteTabControllerFragment"
+        android:name="com.example.marvelapp.ui.FavoriteTabController.FavoriteTabControllerFragment"
+        android:label="FavoriteTabControllerFragment" >
+        <action
+            android:id="@+id/action_favoriteTabControllerFragment_to_comicsFavoriteFragment"
+            app:destination="@id/comicsFavoriteFragment" />
+        <action
+            android:id="@+id/action_favoriteTabControllerFragment_to_heroFavoriteFragment"
+            app:destination="@id/heroFavoriteFragment" />
+        <argument
+            android:name="favorite"
+            app:argType="com.example.marvelapp.data.entity.FavoriteData"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/comicsFavoriteFragment"
+        android:name="com.example.marvelapp.ui.ComicsFavorite.ComicsFavoriteFragment"
+        android:label="fragment_comics_favorite"
+        tools:layout="@layout/fragment_comics_favorite" >
+        <argument
+            android:name="comics"
+            app:argType="com.example.marvelapp.data.entity.ComicsResults" />
+    </fragment>
+    <fragment
+        android:id="@+id/heroFavoriteFragment"
+        android:name="com.example.marvelapp.ui.HeroFavorite.HeroFavoriteFragment"
+        android:label="fragment_hero_favorite"
+        tools:layout="@layout/fragment_hero_favorite" >
+        <argument
+            android:name="hero"
+            app:argType="com.example.marvelapp.data.entity.ResultsData" />
     </fragment>
 </navigation>
