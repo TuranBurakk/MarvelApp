@@ -16,6 +16,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     var profileImage : Uri? = null
     var Bitmap : Bitmap?= null
+
     private val storage by lazy { FirebaseStorage.getInstance() }
     private val  auth by lazy { FirebaseAuth.getInstance() }
     private val database by lazy { FirebaseFirestore.getInstance() }
@@ -28,11 +29,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.UserNameTV.text = auth.currentUser!!.email
-
+        val user = auth.currentUser
         binding.logout.setOnClickListener {
             auth.signOut()
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         }
+
     }
+
 }
