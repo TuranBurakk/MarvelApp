@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.marvelapp.base.BaseFragment
+import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.FragmentLoginBinding
 import com.facebook.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,23 +30,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private lateinit var googleSingInClient: GoogleSignInClient
     private val auth by lazy { Firebase.auth }
     var callbackManager: CallbackManager? = null
+    private val db by lazy { Firebase.firestore }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val user = auth.currentUser
 
-        if (user != null){
+        if (user != null) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
         }
         callbackManager = CallbackManager.Factory.create()
 
         binding.registerbutton.setOnClickListener {
             registerButton(binding.etMail.text.toString(), binding.etPassword.text.toString())
+
+
         }
 
         binding.loginbutton.setOnClickListener {
             loginButton(binding.etMail.text.toString(), binding.etPassword.text.toString())
+
+
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -104,7 +111,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     updateUI(user)
-                }else {
+                    db.collection("user").document(user!!.uid).set(UserData())
+                } else {
                     updateUI(null)
                 }
             }
@@ -116,6 +124,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             if (it.isSuccessful) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 Toast.makeText(requireContext(), "Register Successful", Toast.LENGTH_LONG).show()
+                db.collection("user").document(auth.currentUser!!.uid).set(UserData()).addOnCompleteListener {task ->
+
+                }.addOnFailureListener {excepiton ->
+                    Toast.makeText(context,excepiton.localizedMessage,Toast.LENGTH_LONG).show()
+                }
+
             }
 
         }.addOnFailureListener {
@@ -160,6 +174,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             .addOnCompleteListener {
                 val user = auth.currentUser
                 updateUI(user)
+                db.collection("user").document(user!!.uid).set(UserData())
             }.addOnFailureListener { e ->
                 Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_LONG).show()
             }
@@ -190,6 +205,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         } else {
             loginEmailAndPassword(email, password)
         }
-    }
 
+    }
 }

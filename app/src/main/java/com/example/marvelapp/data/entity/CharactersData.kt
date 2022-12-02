@@ -25,7 +25,8 @@ data class ResultsData(
     @SerializedName("comics")val comics : ComicsData?,
     @SerializedName("series")val series : SeriesData?,
     @SerializedName("stories")val stories :StoriesData?,
-    @SerializedName("urls") val detail : List<Details>?
+    @SerializedName("urls") val detail : List<Details>?,
+    var isFavorite : Boolean = false
 ):Parcelable
 
 @Parcelize

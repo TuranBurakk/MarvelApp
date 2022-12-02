@@ -3,10 +3,8 @@ package com.example.marvelapp.ui.FavoriteTabController
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.marvelapp.base.BaseFragment
 import com.example.marvelapp.databinding.FragmentFavoriteTabControllerBinding
-import com.example.marvelapp.ui.TabController.TabControllerFragmentDirections
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -36,7 +34,7 @@ class FavoriteTabControllerFragment : BaseFragment
 
     private fun initBack(){
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(TabControllerFragmentDirections.actionTabControllerFragmentToHomeFragment())
+            findNavController().popBackStack()
         }
     }
 

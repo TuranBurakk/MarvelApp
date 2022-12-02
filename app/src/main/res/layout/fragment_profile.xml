@@ -4,39 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Profile.ProfileFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".ui.Profile.ProfileFragment">
 
 
     <TextView
         android:id="@+id/UserNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginBottom="93dp"
         android:text="@string/user"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/logout"
+        app:layout_constraintStart_toStartOf="@+id/logout"
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <ImageView
         android:id="@+id/profileImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="94dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/logout"
-        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginBottom="113dp"
         android:text="@string/log_out"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/user_name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/UserNameTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameTV" />
+        app:layout_constraintTop_toTopOf="@+id/UserNameTV" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="45dp"
+        android:layout_height="14dp"
+        android:layout_marginBottom="209dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/UserNameTV"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
