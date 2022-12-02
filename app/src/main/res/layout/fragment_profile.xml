@@ -12,23 +12,23 @@
         android:id="@+id/UserNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginBottom="93dp"
-        android:text="@string/user"
+        android:layout_marginBottom="32dp"
+        android:text="@string/name"
         android:textColor="@color/white"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="@+id/logout"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginBottom="94dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="43dp"
+        android:src="@drawable/profile_photo"
+        app:layout_constraintBottom_toTopOf="@+id/UserNameTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,17 +37,21 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="113dp"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/buttonbg"
+        android:padding="20dp"
         android:text="@string/log_out"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setImageButton" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/user_name"
         android:inputType="textPersonName"
@@ -55,31 +59,36 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/UserNameTV"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/UserNameTV" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="45dp"
-        android:layout_height="14dp"
-        android:layout_marginBottom="209dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/UserNameTV"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
-
-    <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/buttonbg"
+        android:text="Change name"
+        android:textColor="@color/white"
+        android:paddingTop="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/setImageButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameTV" />
+
+    <TextView
+        android:id="@+id/setImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/buttonbg"
+        android:padding="15dp"
+        android:text="Save photo"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
