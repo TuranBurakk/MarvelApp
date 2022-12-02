@@ -8,12 +8,14 @@
         android:id="@+id/comicsFragment2"
         android:icon="@drawable/comicsicon"
         android:title="@string/comics"/>
-    <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/burgericon"
-        android:title="@string/profile"/>
+
     <item
         android:id="@+id/favoriteTabControllerFragment"
         android:title="@string/favorite"
         android:icon="@drawable/ic_baseline_favorite_border"/>
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/burgericon"
+        android:title="@string/profile"/>
 </menu>

@@ -12,7 +12,10 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(
     private val repository: Repository) : ViewModel() {
 
-        fun getHero(offset : Int): LiveData<Resource<CharactersData>>{
+
+    fun getHero(offset : Int): LiveData<Resource<CharactersData>>{
             return repository.getHero(offset)
         }
+
+
 }
