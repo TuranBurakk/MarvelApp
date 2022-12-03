@@ -11,7 +11,7 @@ data class UserData(
     var heroName : String? =null,
     var comicsPhoto : String? =null,
     var comicsName : String? =null,
-    var id : String? = null
+    var comicsId : Long? = null
 ):Parcelable
 
 

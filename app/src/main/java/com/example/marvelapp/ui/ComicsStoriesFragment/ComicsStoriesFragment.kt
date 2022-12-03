@@ -7,8 +7,9 @@ import com.example.marvelapp.base.BaseFragment
 import com.example.marvelapp.data.entity.ComicsResults
 import com.example.marvelapp.databinding.FragmentComicsStoriesBinding
 import com.example.marvelapp.ui.WebView.WebViewFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ComicsStoriesFragment(val comics: ComicsResults) :
     BaseFragment<FragmentComicsStoriesBinding>(FragmentComicsStoriesBinding::inflate) {
 

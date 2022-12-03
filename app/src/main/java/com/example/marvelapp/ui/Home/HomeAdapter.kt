@@ -15,7 +15,7 @@ import com.example.marvelapp.utils.downloadFromUrl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
+class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
 
     private val db by lazy { FirebaseFirestore.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
@@ -24,6 +24,7 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
     class HeroHolder(val binding: HeroRowBinding): RecyclerView.ViewHolder(binding.root){
 
     }
+
     private val differCallback = object : DiffUtil.ItemCallback<ResultsData>(){
         override fun areItemsTheSame(oldItem: ResultsData, newItem: ResultsData): Boolean {
             return oldItem == newItem
@@ -34,6 +35,7 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
         }
 
     }
+
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroHolder {
@@ -47,6 +49,7 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
         val url = "${hero.image?.path}.${hero.image?.extension}"
         val newUrl = convert(url)
         val heroName = hero.name.toString()
+
         holder.binding.apply {
             nameTv.text = hero.name
             imageView.downloadFromUrl(newUrl)
@@ -61,6 +64,7 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
         }else{
             holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
+
         holder.binding.imgFav.setOnClickListener {
             when(hero.isFavorite){
                 true ->{
@@ -70,10 +74,9 @@ class HomeAdapter(): RecyclerView.Adapter<HomeAdapter.HeroHolder>() {
                 false ->{
                     holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border)
                     db.collection(auth.currentUser!!.uid).document(hero.id.toString()).set(UserData(null,null,newUrl,heroName))
+                }
             }
-            }
-            }
-
+        }
     }
 
     override fun getItemCount(): Int = differ.currentList.size
