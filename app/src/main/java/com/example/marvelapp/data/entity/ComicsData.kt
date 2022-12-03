@@ -18,12 +18,13 @@ data class ComicsDoc(
 
 @Parcelize
 data class ComicsResults(
-    @SerializedName("id") val id : Int?,
+    @SerializedName("id") val id : Long?,
     @SerializedName("title")val title : String?,
     @SerializedName("description")val description : String?,
     @SerializedName("format") val format : String?,
     @SerializedName("urls") val comicsDetails : List<ComicsDetail>?,
-    @SerializedName("thumbnail") val thumbnail : ComicsThumbnailData
+    @SerializedName("thumbnail") val thumbnail : ComicsThumbnailData,
+    var isFavorite : Boolean = false
 ):Parcelable
 
 @Parcelize

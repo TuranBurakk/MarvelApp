@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelapp.base.BaseFragment
 import com.example.marvelapp.data.entity.ComicsResults
+import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.FragmentComicsBinding
 import com.example.marvelapp.utils.Constants
 import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -24,6 +27,9 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
     private val viewModel : ComicsFragmentViewModel by viewModels()
     private var totalCount = 0
     private var offset = Constants.offset
+    private val auth by lazy { FirebaseAuth.getInstance() }
+    private val database by lazy { FirebaseFirestore.getInstance() }
+    private val favList = arrayListOf<UserData>()
 
     override fun onStart() {
         super.onStart()
@@ -50,7 +56,7 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
                     comicsList.addAll(response.data?.comics?.results ?: arrayListOf())
                     val scrollDistance = comicsList.size - (response.data?.comics?.results?.size ?: 0)
                     binding.comicsRecyclerView.scrollToPosition(scrollDistance)
-                    setData()
+                    checkFavorite()
                 }
 
                 Resource.Status.ERROR -> {
@@ -113,4 +119,27 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
             adapter.differ.submitList(filteredlist)
         }
     }
+
+    private fun checkFavorite() {
+        database.collection(auth.currentUser!!.uid).addSnapshotListener { snapshot, exception ->
+            val documents = snapshot?.documents
+            favList.clear()
+            if (documents != null) {
+                for (document in documents) {
+                    val comicsName = document.get("comicsName") as? String
+                    val comicsPhoto = document.get("comicsPhoto") as? String
+                    val comicsId = document.get("comicsId") as? Long
+                    val downloadComics = UserData(comicsPhoto = comicsPhoto, comicsName = comicsName, comicsId = comicsId)
+                    favList.add(downloadComics)
+                }
+                for (item in favList) {
+                    comicsList.find {
+                        it.id == item.comicsId
+                    }?.isFavorite = true
+                }
+                setData()
+            }
+        }
+    }
+
 }

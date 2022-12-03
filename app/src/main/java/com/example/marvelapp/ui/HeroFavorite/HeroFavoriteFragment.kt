@@ -34,7 +34,9 @@ class HeroFavoriteFragment: BaseFragment<FragmentHeroFavoriteBinding>
                     val heroName = document.get("heroName") as? String
                     val heroPhoto = document.get("heroPhoto") as? String
                     val downloadHero = UserData(null,null,heroPhoto,heroName)
-                    favList.add(downloadHero)
+                    if (downloadHero.heroPhoto != null){
+                        favList.add(downloadHero)
+                    }
                 }
                 adapter.setData(favList)
             }

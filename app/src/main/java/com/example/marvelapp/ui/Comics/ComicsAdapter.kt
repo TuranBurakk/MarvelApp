@@ -7,14 +7,19 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.example.marvelapp.R
 import com.example.marvelapp.data.entity.ComicsResults
+import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.ComicsRowBinding
 import com.example.marvelapp.utils.convert
 import com.example.marvelapp.utils.downloadFromUrl
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
 
-
+    private val db by lazy { FirebaseFirestore.getInstance() }
+    private val auth by lazy { FirebaseAuth.getInstance() }
 
     class ComicsHolder(val binding : ComicsRowBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -53,10 +58,27 @@ class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
                 .navigate(ComicsFragmentDirections
                     .actionComicsFragment2ToComicsTabControllerFragment(comic))
         }
+        if (comic.isFavorite){
+            holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border)
+        }else{
+            holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
 
+        holder.binding.imgFav.setOnClickListener {
+            when(comic.isFavorite){
+                true ->{
+                    holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                    db.collection(auth.currentUser!!.uid).document(comic.id.toString()).delete()
+                }
+                false ->{
+                    holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border)
+                    db.collection(auth.currentUser!!.uid).document(comic.id.toString()).
+                    set(UserData(comicsName = comic.title, comicsPhoto = newUrl, comicsId = comic.id))
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int = differ.currentList.size
-
 
 }
