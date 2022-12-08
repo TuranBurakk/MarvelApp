@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.marvelapp.R
 import com.example.marvelapp.base.BaseFragment
 import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.FragmentLoginBinding
@@ -28,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
 
-    private lateinit var googleSingInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
     private val auth by lazy { Firebase.auth }
     var callbackManager: CallbackManager? = null
     private val db by lazy { Firebase.firestore }
@@ -56,14 +57,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("1030990752043-1vod67u1oec2plk75eg1sl4se7komk8t.apps.googleusercontent.com")
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        googleSingInClient = GoogleSignIn.getClient(requireContext(), gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         binding.googlebutton.setOnClickListener {
-            googleSingIn()
+            googleSignIn()
         }
 
         binding.facebookbutton.setReadPermissions("email", "public_profile")
@@ -92,7 +93,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SING_IN) {
+        if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
@@ -111,8 +112,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
+                    if (task.result.additionalUserInfo!!.isNewUser){
+                        db.collection("user").document(user!!.uid).set(UserData())
+                    }
                     updateUI(user)
-                    db.collection("user").document(user!!.uid).set(UserData())
+
                 } else {
                     updateUI(null)
                 }
@@ -151,14 +155,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun googleSingIn() {
-        val singInIntent = googleSingInClient.signInIntent
-        startActivityForResult(singInIntent, RC_SING_IN)
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+    private fun googleSignIn() {
+        val singInIntent = googleSignInClient.signInIntent
+        startActivityForResult(singInIntent, RC_SIGN_IN)
     }
 
     companion object {
-        const val RC_SING_IN = 1001
+        const val RC_SIGN_IN = 1001
         const val EXTRA_NAME = "EXTRA NAME"
     }
 
