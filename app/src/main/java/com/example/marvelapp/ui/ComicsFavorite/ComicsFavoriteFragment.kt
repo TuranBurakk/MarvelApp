@@ -8,6 +8,7 @@ import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.FragmentComicsFavoriteBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 
 class ComicsFavoriteFragment: BaseFragment<FragmentComicsFavoriteBinding>
@@ -16,7 +17,6 @@ class ComicsFavoriteFragment: BaseFragment<FragmentComicsFavoriteBinding>
     private val adapter by lazy { ComicsFavoriteAdapter() }
     private val database by lazy { FirebaseFirestore.getInstance()}
     private val auth by lazy { FirebaseAuth.getInstance() }
-    val favList = ArrayList<UserData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,19 +26,10 @@ class ComicsFavoriteFragment: BaseFragment<FragmentComicsFavoriteBinding>
     }
 
     private fun getData(){
-        database.collection(auth.currentUser!!.uid).addSnapshotListener { snapshot, exception ->
-            val documents = snapshot?.documents
-            favList.clear()
-            if (documents != null) {
-                for (document in documents){
-                    val comicsName = document.get("comicsName") as? String
-                    val comicsPhoto = document.get("comicsPhoto") as? String
-                    val downloadComics = UserData(comicsName = comicsName, comicsPhoto = comicsPhoto)
-                    if (downloadComics.comicsPhoto != null){
-                        favList.add(downloadComics)
-                    }
-                }
-                adapter.setData(favList)
+        database.collection("user").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val comics = it.toObject<UserData>()
+            if (comics != null){
+                adapter.setData(comics.favComicsList)
             }
         }
     }

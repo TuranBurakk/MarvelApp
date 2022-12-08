@@ -16,6 +16,7 @@ import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -29,7 +30,6 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
     private var offset = Constants.offset
     private val auth by lazy { FirebaseAuth.getInstance() }
     private val database by lazy { FirebaseFirestore.getInstance() }
-    private val favList = arrayListOf<UserData>()
 
     override fun onStart() {
         super.onStart()
@@ -120,26 +120,18 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>(FragmentComicsBinding
         }
     }
 
-    private fun checkFavorite() {
-        database.collection(auth.currentUser!!.uid).addSnapshotListener { snapshot, exception ->
-            val documents = snapshot?.documents
-            favList.clear()
-            if (documents != null) {
-                for (document in documents) {
-                    val comicsName = document.get("comicsName") as? String
-                    val comicsPhoto = document.get("comicsPhoto") as? String
-                    val comicsId = document.get("comicsId") as? Long
-                    val downloadComics = UserData(comicsPhoto = comicsPhoto, comicsName = comicsName, comicsId = comicsId)
-                    favList.add(downloadComics)
+        private fun checkFavorite() {
+            database.collection("user").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+                val comics = it.toObject<UserData>()
+                if (comics != null) {
+                    for (item in comics.favComicsList){
+                        comicsList.find {
+                            it.id == item.comicsId
+                        }?.isFavorite = true
+                    }
                 }
-                for (item in favList) {
-                    comicsList.find {
-                        it.id == item.comicsId
-                    }?.isFavorite = true
-                }
+
                 setData()
             }
         }
-    }
-
 }

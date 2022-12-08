@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.marvelapp.base.BaseFragment
+import com.example.marvelapp.data.entity.FavHero
 import com.example.marvelapp.data.entity.UserData
 import com.example.marvelapp.databinding.FragmentHeroFavoriteBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class HeroFavoriteFragment: BaseFragment<FragmentHeroFavoriteBinding>
     (FragmentHeroFavoriteBinding::inflate) {
@@ -15,7 +17,7 @@ class HeroFavoriteFragment: BaseFragment<FragmentHeroFavoriteBinding>
     private val adapter by lazy { HeroFavoriteAdapter() }
     private val database by lazy { FirebaseFirestore.getInstance()}
     private val auth by lazy { FirebaseAuth.getInstance() }
-    val favList = ArrayList<UserData>()
+    private val favList = ArrayList<FavHero>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,18 +27,15 @@ class HeroFavoriteFragment: BaseFragment<FragmentHeroFavoriteBinding>
         getData()
 
     }
-    private fun getData(){
-        database.collection(auth.currentUser!!.uid).addSnapshotListener { snapshot, exception ->
-            val documents = snapshot?.documents
-            favList.clear()
-            if (documents != null) {
-                for (document in documents){
-                    val heroName = document.get("heroName") as? String
-                    val heroPhoto = document.get("heroPhoto") as? String
-                    val downloadHero = UserData(null,null,heroPhoto,heroName)
-                    if (downloadHero.heroPhoto != null){
-                        favList.add(downloadHero)
-                    }
+    private fun getData() {
+        database.collection("user").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val hero = it.toObject<UserData>()
+            if (hero != null) {
+                for (item in hero.favHeroList){
+                    val name = item.heroName
+                    val photo = item.heroPhoto
+                    val downloadHero = FavHero(photo,name)
+                    favList.add(downloadHero)
                 }
                 adapter.setData(favList)
             }

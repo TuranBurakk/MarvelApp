@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.marvelapp.R
 import com.example.marvelapp.data.entity.ComicsResults
-import com.example.marvelapp.data.entity.UserData
+import com.example.marvelapp.data.entity.FavComics
 import com.example.marvelapp.databinding.ComicsRowBinding
 import com.example.marvelapp.utils.convert
 import com.example.marvelapp.utils.downloadFromUrl
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
+
 
     private val db by lazy { FirebaseFirestore.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
@@ -67,13 +69,16 @@ class ComicsAdapter: Adapter<ComicsAdapter.ComicsHolder>(){
         holder.binding.imgFav.setOnClickListener {
             when(comic.isFavorite){
                 true ->{
+                    val deleteComics = FavComics(newUrl,comic.title,comic.id)
                     holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-                    db.collection(auth.currentUser!!.uid).document(comic.id.toString()).delete()
+                    db.collection("user").document(auth.currentUser!!.uid)
+                        .update("favComicsList",FieldValue.arrayRemove(deleteComics))
                 }
                 false ->{
+                    val favComics = FavComics(newUrl,comic.title,comic.id)
                     holder.binding.imgFav.setImageResource(R.drawable.ic_baseline_favorite_border)
-                    db.collection(auth.currentUser!!.uid).document(comic.id.toString()).
-                    set(UserData(comicsName = comic.title, comicsPhoto = newUrl, comicsId = comic.id))
+                    db.collection("user").document(auth.currentUser!!.uid).
+                    update("favComicsList" ,FieldValue.arrayUnion(favComics))
                 }
             }
         }

@@ -55,7 +55,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 binding.editTextTextPersonName.visibility = View.GONE
                 binding.UserNameTV.text = binding.editTextTextPersonName.text
                 val userName = binding.UserNameTV.text.toString()
-                database.collection(auth.currentUser!!.uid).document("profile").update("userName",userName)
+                database.collection("user").document(auth.currentUser!!.uid).update("userName",userName)
             }
 
         }
@@ -69,7 +69,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val uploadImageReferance =  storage.reference.child("images").child(imageName)
                 uploadImageReferance.downloadUrl.addOnSuccessListener { uri ->
                     val downloadUrl = uri.toString()
-                    database.collection(auth.currentUser!!.uid).document("profile").update("userPhoto",downloadUrl)
+                    database.collection("user").document(auth.currentUser!!.uid).update("userPhoto",downloadUrl)
+                    getData()
                 }
             }
 
@@ -84,7 +85,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
     private fun getData(){
-        database.collection(auth.currentUser!!.uid).document("profile").get().addOnSuccessListener {
+        database.collection("user").document(auth.currentUser!!.uid).get().addOnSuccessListener {
             val image = it.get("userPhoto").toString()
             val userName = it.get("userName").toString()
             binding.UserNameTV.text = userName

@@ -5,13 +5,23 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserData(
-    var userName : String? = null,
-    var userPhoto : String? = null,
-    var heroPhoto : String? =null,
-    var heroName : String? =null,
-    var comicsPhoto : String? =null,
-    var comicsName : String? =null,
-    var comicsId : Long? = null
+    val userName : String? = null,
+    val userPhoto : String? = null,
+    val favHeroList : List<FavHero> = emptyList(),
+    val favComicsList: List<FavComics> = emptyList()
+):Parcelable
+
+@Parcelize
+data class FavHero(
+    val heroPhoto : String? =null,
+    val heroName : String? =null
+): Parcelable
+
+@Parcelize
+data class FavComics(
+    val comicsPhoto : String? =null,
+    val comicsName : String? =null,
+    val comicsId : Long? = null
 ):Parcelable
 
 

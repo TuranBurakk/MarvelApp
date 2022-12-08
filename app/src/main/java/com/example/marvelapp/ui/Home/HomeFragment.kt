@@ -16,6 +16,7 @@ import com.example.marvelapp.utils.Resource
 import com.example.marvelapp.utils.showDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -30,7 +31,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val heroList = arrayListOf<ResultsData>()
     private val auth by lazy { FirebaseAuth.getInstance() }
     private val database by lazy { FirebaseFirestore.getInstance() }
-    private val favList = arrayListOf<UserData>()
 
     override fun onStart() {
         super.onStart()
@@ -118,25 +118,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun checkFavorite() {
-        database.collection(auth.currentUser!!.uid).addSnapshotListener { snapshot, exception ->
-            val documents = snapshot?.documents
-            favList.clear()
-            if (documents != null) {
-                for (document in documents) {
-                    val heroName = document.get("heroName") as? String
-                    val heroPhoto = document.get("heroPhoto") as? String
-                    val downloadHero = UserData(null, null, heroPhoto, heroName)
-                    favList.add(downloadHero)
-                }
-                for (item in favList) {
+        database.collection("user").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val hero = it.toObject<UserData>()
+            if (hero != null){
+                for (item in hero.favHeroList){
                     heroList.find {
                         it.name == item.heroName
                     }?.isFavorite = true
                 }
-                setData()
             }
+            setData()
         }
-    }
-
-
+     }
 }
+

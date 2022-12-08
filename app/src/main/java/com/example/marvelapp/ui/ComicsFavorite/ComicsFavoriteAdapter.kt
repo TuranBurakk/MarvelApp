@@ -3,13 +3,13 @@ package com.example.marvelapp.ui.ComicsFavorite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marvelapp.data.entity.UserData
+import com.example.marvelapp.data.entity.FavComics
 import com.example.marvelapp.databinding.FavComicsRowBinding
 import com.example.marvelapp.utils.downloadFromUrl
 
 class ComicsFavoriteAdapter : RecyclerView.Adapter<ComicsFavoriteAdapter.FavComicsHolder>() {
 
-    private var list = emptyList<UserData>()
+    private var list = emptyList<FavComics>()
 
     class FavComicsHolder(val binding : FavComicsRowBinding ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -29,7 +29,7 @@ class ComicsFavoriteAdapter : RecyclerView.Adapter<ComicsFavoriteAdapter.FavComi
 
     override fun getItemCount() = list.size
 
-    fun setData(newList: List<UserData>) {
+    fun setData(newList: List<FavComics>) {
         list = newList
         notifyDataSetChanged()
     }
