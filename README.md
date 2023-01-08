@@ -1,4 +1,12 @@
-• This project is a sample app for Android using Firebase and API.
-• Kotlin / Android Studio
-• Navigation, Room, RecyclerView, View Model, MVVM, Retrofit,
-Fragments, Firebase Firestore, Lottie, hilt , glide
+# MarvelApp
+
+## Technologies
+- Hilt (Dependency Injection)
+- MVVM (Architecture)
+- Coroutines (Asnchronous Operations)
+- Retrofit (Network Operations)
+- ViewBinding
+- Navigation Component
+- Safe-Args
+- Glide
+- Lottie Animation
