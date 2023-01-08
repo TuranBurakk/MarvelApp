@@ -10,3 +10,4 @@
 - Safe-Args
 - Glide
 - Lottie Animation
+- Firebase
