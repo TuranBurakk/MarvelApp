@@ -52,8 +52,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
         binding.loginbutton.setOnClickListener {
             loginButton(binding.etMail.text.toString(), binding.etPassword.text.toString())
-
-
+        }
+        binding.buttonfacebook.setOnClickListener {
+            binding.facebookbutton.callOnClick()
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -71,7 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.facebookbutton.setFragment(this)
         FacebookSdk.sdkInitialize(requireContext())
 
-        binding.facebookbutton.registerCallback(callbackManager, object :
+        binding.facebookbutton.registerCallback(callbackManager!!, object :
             FacebookCallback<com.facebook.login.LoginResult> {
             override fun onCancel() {
             }

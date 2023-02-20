@@ -76,8 +76,8 @@
 
     <TextView
         android:id="@+id/loginbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/buttonlogin"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,18 +87,19 @@
 
     <TextView
         android:id="@+id/googlebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/buttongoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginbutton" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebookbutton"
-        android:layout_width="308dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/buttonfacebook"
+        android:layout_width="300dp"
+        android:background="@drawable/buttonfacebook"
+        android:layout_height="44dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,14 +107,24 @@
 
     <TextView
         android:id="@+id/registerbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/buttonreg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/facebookbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonfacebook" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebookbutton"
+        android:layout_width="308dp"
+        android:visibility="gone"
+        android:layout_height="40dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/googlebutton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
