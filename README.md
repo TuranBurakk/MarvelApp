@@ -14,7 +14,7 @@
 
 ## Screen
 
-<img src = "https://user-images.githubusercontent.com/109890557/212684343-213acba1-da6f-4411-91ce-cf5500b1f026.jpg" width="200" height="400"/>
+<img src = "https://user-images.githubusercontent.com/109890557/220072654-24e47440-82bf-4f91-838d-235ef6b9a2f1.png" width="200" height="400"/>
 <img src = "https://user-images.githubusercontent.com/109890557/212684351-8b9a4c9f-78d1-4431-9a50-127c6f1a7191.jpg" width="200" height="400"/>
 <img src = "https://user-images.githubusercontent.com/109890557/212684368-658b8429-6cc4-4610-9d2c-0a384c5bebc2.jpg" width="200" height="400"/>
 <img src = "https://user-images.githubusercontent.com/109890557/212684374-c4fadb68-69ed-477e-a77a-4ff17333c298.jpg" width="200" height="400"/>
